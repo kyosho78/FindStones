@@ -1,0 +1,41 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FindStones.RegisterPage"
+             Title="Register">
+
+    <StackLayout Padding="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+
+        <Label Text="Register" FontSize="24" HorizontalOptions="Center" />
+
+        <!-- Username Entry -->
+        <Entry Placeholder="Username" 
+               Text="{Binding Username}" 
+               VerticalOptions="Center" />
+
+        <!-- Email Entry -->
+        <Entry Placeholder="Email" 
+               Text="{Binding Email}" 
+               Keyboard="Email" 
+               VerticalOptions="Center" />
+
+        <!-- Password Entry -->
+        <Entry Placeholder="Password" 
+               Text="{Binding Password}" 
+               IsPassword="True" 
+               VerticalOptions="Center" />
+
+        <!-- Register Button -->
+        <Button Text="Register" 
+                Command="{Binding RegisterCommand}" 
+                VerticalOptions="Center" />
+
+        <!-- Confirmation message -->
+        <Label Text="{Binding ConfirmationMessage}" 
+               TextColor="Green" 
+               FontSize="14" 
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+    </StackLayout>
+
+</ContentPage>
