@@ -1,19 +1,23 @@
 ﻿using System.ComponentModel;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
+
 
 namespace FindStones
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
         private readonly ApiServices _apiService;
+        private readonly INavigation _navigation;
         public ICommand LoginCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(INavigation navigation)
         {
             _apiService = new ApiServices();
+            _navigation = navigation;
             LoginCommand = new Command(async () => await LoginUserAsync());
         }
 
@@ -60,17 +64,27 @@ namespace FindStones
 
             try
             {
-                string result = await _apiService.LoginUserAsync(Username, Password);
+                HttpResponseMessage response = await _apiService.LoginUserAsync(Username, Password);
 
-                if (!string.IsNullOrEmpty(result))
+                if (response.IsSuccessStatusCode)
                 {
-                    // Assuming result is some success message or token
-                    LoginMessage = "Login successful!";
-                    // Here you can navigate to another page or store the token.
+                    // Save the login state
+                    Preferences.Set("isLoggedIn", true);
+
+                    // Set MainTabbedPage as the new root of the application to remove back button
+                    Application.Current.MainPage = new MainTabbedPage();  // Reset the root page to MainTabbedPage
+                }
+                else if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    LoginMessage = "User not found. Please check the username.";
+                }
+                else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    LoginMessage = "Wrong password. Please try again.";
                 }
                 else
                 {
-                    LoginMessage = "Login failed. Please check your credentials.";
+                    LoginMessage = "Login failed. Please try again.";
                 }
             }
             catch (Exception ex)
@@ -78,6 +92,8 @@ namespace FindStones
                 LoginMessage = $"Error: {ex.Message}";
             }
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

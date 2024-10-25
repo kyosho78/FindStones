@@ -1,10 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FindStones.LoginPage"
-             Title="Login">
+             Title="Go and Register!">
+
+
 
     <StackLayout Padding="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-        <Label Text="Login" FontSize="24" HorizontalOptions="Center" />
+        <Label Text="Welcome to Find Stones!" 
+               FontSize="28" 
+               HorizontalOptions="CenterAndExpand"
+               VerticalOptions="CenterAndExpand"/>
+        <Label Text="Login" FontSize="24" HorizontalOptions="Center"
+               Margin="0,80,0,0"/>
 
         <!-- Username Entry -->
         <Entry Placeholder="Username" 
@@ -20,13 +28,16 @@
         <!-- Login Button -->
         <Button Text="Login" 
                 Command="{Binding LoginCommand}" 
-                VerticalOptions="Center" />
+                VerticalOptions="Center"
+                Margin="0,10,0,0"/>
+
 
         <!-- Confirmation message -->
         <Label Text="{Binding LoginMessage}" 
                TextColor="Green" 
                FontSize="20" 
                HorizontalOptions="Center"
-               VerticalOptions="Center" />
+               VerticalOptions="Center"
+               Margin="0,10,0,0"/>
     </StackLayout>
 </ContentPage>

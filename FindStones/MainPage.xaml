@@ -3,12 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FindStones.MainPage">
 
+
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="20">
-            <Button Text="Go to Register" Clicked="OnRegisterClicked" />
-            <Button Text="Go to Login" Clicked="OnLoginClicked" />
+            <Label Text="Welcome to Find Stones!" 
+              FontSize="28" 
+              HorizontalOptions="CenterAndExpand"
+              VerticalOptions="CenterAndExpand"/>
+            <Button Text="Register" 
+                    Clicked="OnRegisterClicked" 
+                    VerticalOptions="Center" />
+            <Button Text="Login in" 
+                    Clicked="OnLoginClicked" 
+                    VerticalOptions="Center" />
 
 
 

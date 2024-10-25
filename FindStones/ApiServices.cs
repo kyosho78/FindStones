@@ -96,19 +96,15 @@ public class ApiServices
     }
 
 
-    public async Task<string> LoginUserAsync(string username, string password)
+    public async Task<HttpResponseMessage> LoginUserAsync(string username, string password)
     {
         var loginData = new { Username = username, Password = password };
         var jsonContent = JsonConvert.SerializeObject(loginData);
         var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
         HttpResponseMessage response = await _httpClient.PostAsync("api/Users/login", content);
-        if (response.IsSuccessStatusCode)
-        {
-            // Assume the server returns a token or some login data
-            return await response.Content.ReadAsStringAsync();  // Typically a JWT token or user data
-        }
-        return null;
+        return response;  // Return the HttpResponseMessage
     }
+
 
 }
