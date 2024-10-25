@@ -78,7 +78,7 @@ namespace FindStones
         public MainPageViewModel()
         {
             _apiService = new ApiServices();
-            LoadDataAsync();  // Call the method to load all data
+            LoadDataAsync();
         }
 
         public async Task LoadDataAsync()

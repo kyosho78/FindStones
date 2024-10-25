@@ -72,7 +72,7 @@ namespace FindStones
                     Preferences.Set("isLoggedIn", true);
 
                     // Set MainTabbedPage as the new root of the application to remove back button
-                    Application.Current.MainPage = new MainTabbedPage();  // Reset the root page to MainTabbedPage
+                    Application.Current.MainPage = new MainTabbedPage();  
                 }
                 else if (response.StatusCode == HttpStatusCode.NotFound)
                 {

@@ -11,7 +11,7 @@ namespace FindStones
     public class RegisterViewModel : INotifyPropertyChanged
     {
         private readonly ApiServices _apiService;
-        private readonly INavigation _navigation;  // Add this
+        private readonly INavigation _navigation; 
 
         public ICommand RegisterCommand { get; }
 
@@ -72,7 +72,7 @@ namespace FindStones
             {
                 Username = this.Username,
                 Email = this.Email,
-                PasswordHash = this.Password // Ideally, you'd hash this on the server side
+                PasswordHash = this.Password
             };
 
             // Make the API call to register the user
