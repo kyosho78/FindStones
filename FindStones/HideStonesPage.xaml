@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FindStones.HideStonesPage"
+             Title="Hide Stones">
+
+    <StackLayout Padding="10">
+        <Label Text="Take a picture of the stone and save its location" 
+               FontSize="18" 
+               HorizontalOptions="Center" />
+
+        <!-- Button to capture the image -->
+        <Button Text="Take Picture"
+                Clicked="OnTakePictureClicked"
+                VerticalOptions="Center" />
+
+        <!-- Image to display the captured photo -->
+        <Image x:Name="CapturedImage"
+               HeightRequest="300"
+               VerticalOptions="CenterAndExpand" />
+
+        <!-- Button to capture the location -->
+        <Button Text="Get Current Location"
+                Clicked="OnGetLocationClicked"
+                VerticalOptions="Center" />
+
+        <!-- Label to display the current location -->
+        <Label x:Name="LocationLabel"
+               Text="Location not captured yet"
+               FontSize="14"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+
+        <!-- Button to save the hidden stone -->
+        <Button Text="Hide Stone"
+                Clicked="OnHideStoneClicked"
+                VerticalOptions="End" />
+    </StackLayout>
+</ContentPage>

@@ -64,27 +64,22 @@ namespace FindStones
 
             try
             {
-                HttpResponseMessage response = await _apiService.LoginUserAsync(Username, Password);
+                // Call the API service to login, which returns a tuple (bool Success, int UserId, string ErrorMessage)
+                var (Success, UserId, ErrorMessage) = await _apiService.LoginUserAsync(Username, Password);
 
-                if (response.IsSuccessStatusCode)
+                if (Success)
                 {
-                    // Save the login state
+                    // Save the login state and user ID
                     Preferences.Set("isLoggedIn", true);
+                    Preferences.Set("UserId", UserId);
 
-                    // Set MainTabbedPage as the new root of the application to remove back button
-                    Application.Current.MainPage = new MainTabbedPage();  
-                }
-                else if (response.StatusCode == HttpStatusCode.NotFound)
-                {
-                    LoginMessage = "User not found. Please check the username.";
-                }
-                else if (response.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    LoginMessage = "Wrong password. Please try again.";
+                    // Set MainTabbedPage as the new root of the application to remove the back button
+                    Application.Current.MainPage = new MainTabbedPage();
                 }
                 else
                 {
-                    LoginMessage = "Login failed. Please try again.";
+                    // Display error message returned from the API
+                    LoginMessage = ErrorMessage;
                 }
             }
             catch (Exception ex)
@@ -92,6 +87,7 @@ namespace FindStones
                 LoginMessage = $"Error: {ex.Message}";
             }
         }
+
 
 
 
