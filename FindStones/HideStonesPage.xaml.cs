@@ -98,6 +98,13 @@ namespace FindStones
             if (response.IsSuccessStatusCode)
             {
                 await DisplayAlert("Success", "The stone has been hidden successfully.", "OK");
+
+                // Refresh the hidden stones list in MainTabbedPage
+                var mainPage = (MainTabbedPage)Application.Current.MainPage;
+                mainPage.LoadHiddenStones();
+
+                // Optionally switch to the Hidden Stones tab
+                mainPage.CurrentPage = mainPage.Children.FirstOrDefault(p => p.Title == "Hidden Stones");
             }
             else
             {

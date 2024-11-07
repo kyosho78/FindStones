@@ -4,6 +4,23 @@
             xmlns:local="clr-namespace:FindStones"
             x:Class="FindStones.MainTabbedPage">
 
+
+    <ContentPage Title="Hidden Stones">
+        <StackLayout>
+            <CollectionView x:Name="HiddenStonesCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Image Source="{Binding ImageUrl}" HeightRequest="200" />
+                            <Label Text="{Binding LastSeenLocation}" FontSize="14" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage>
+
+
     <!-- Tab for Hide Stones -->
     <local:HideStonesPage Title="Hide Stones" />
 

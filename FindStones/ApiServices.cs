@@ -83,6 +83,21 @@ public class ApiServices
         return null;
     }
 
+    // API call for Location model
+    public async Task<List<Item>> GetHiddenStonesAsync(int userId)
+    {
+        HttpResponseMessage response = await _httpClient.GetAsync($"api/Items/user/{userId}/hiddenstones");
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<List<Item>>(jsonResponse);
+        }
+        return new List<Item>(); // Return an empty list if the request fails
+    }
+
+
+
+
     // POST method to create a new Item
     public async Task<HttpResponseMessage> RegisterUserAsync(User newUser)
     {
