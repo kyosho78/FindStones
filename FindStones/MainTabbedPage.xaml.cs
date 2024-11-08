@@ -7,6 +7,27 @@ namespace FindStones
     {
         private readonly ApiServices _apiService;
 
+        // Refreshing property
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+
+        // Command to refresh data
+        public ICommand RefreshCommand => new Command(async () =>
+        {
+            IsRefreshing = true;
+            await RefreshHiddenStones();
+            IsRefreshing = false;
+        });
+
+        // Command to open maps
         public ICommand OpenMapsCommand => new Command<string>(async (location) =>
         {
             if (!string.IsNullOrWhiteSpace(location))
@@ -20,6 +41,7 @@ namespace FindStones
             }
         });
 
+        // Command to show full screen image
         public ICommand ShowFullScreenImageCommand => new Command<string>(async (imageUrl) =>
         {
             if (!string.IsNullOrEmpty(imageUrl))
@@ -27,9 +49,6 @@ namespace FindStones
                 await Navigation.PushModalAsync(new ImagePopupPage(imageUrl));
             }
         });
-
-
-
 
 
         public MainTabbedPage()
@@ -42,10 +61,18 @@ namespace FindStones
 
         }
 
-
+        //Method to load hidden stones
         private async void LoadHiddenStones()
         {
-            var userId = Preferences.Get("UserId", 0); // Assumes you are storing UserId in Preferences
+            var userId = Preferences.Get("UserId", 0);
+            var hiddenStones = await _apiService.GetHiddenStonesAsync(userId);
+            HiddenStonesCollectionView.ItemsSource = hiddenStones;
+        }
+
+        // Method to refresh data
+        private async Task RefreshHiddenStones()
+        {
+            var userId = Preferences.Get("UserId", 0);
             var hiddenStones = await _apiService.GetHiddenStonesAsync(userId);
             HiddenStonesCollectionView.ItemsSource = hiddenStones;
         }

@@ -7,14 +7,18 @@
 
     <ContentPage Title="Hidden Stones">
         <StackLayout>
-            <CollectionView x:Name="HiddenStonesCollectionView" VerticalOptions="FillAndExpand">
-                <CollectionView.ItemTemplate>
+            <Label Text="Pull down to Refreash Stones" Padding="10" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <RefreshView x:Name="HiddenStonesRefreshView"
+                         Command="{Binding RefreshCommand}"
+                         IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView x:Name="HiddenStonesCollectionView" VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <!-- Frame for a compact box effect -->
                         <Frame Padding="5" Margin="5" HasShadow="False" BorderColor="Gray" CornerRadius="10">
-                            <!-- Horizontal layout for compact arrangement -->
-                            <HorizontalStackLayout Spacing="10">
-                                <!-- Smaller main image with tap gesture to open in full screen -->
+                            <!-- Horizontal layout for compact layout -->
+                                <HorizontalStackLayout Spacing="10">
+                                    <!-- Smaller main image with tap function to open in full screen -->
                                 <Image Source="{Binding ImageUrl}" HeightRequest="80" WidthRequest="80">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer 
@@ -43,6 +47,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </RefreshView>
         </StackLayout>
     </ContentPage>
 
