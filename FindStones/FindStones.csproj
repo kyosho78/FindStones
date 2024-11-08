@@ -70,6 +70,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="FindStonesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="HideStonesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

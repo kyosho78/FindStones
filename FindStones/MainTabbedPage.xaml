@@ -71,13 +71,8 @@
     <local:HideStonesPage Title="Hide Stones" />
 
     <!-- Tab for Found Stones -->
-    <ContentPage Title="Found Stones">
-        <StackLayout>
-            <Label Text="This is the Found Stones page" 
-                   VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage>
+    <local:FindStonesPage Title="Find Stones" />
+
 
     <!-- Tab for About -->
     <ContentPage Title="About">
