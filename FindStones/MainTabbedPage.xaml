@@ -19,33 +19,42 @@
                             <!-- Horizontal layout for compact layout -->
                                 <HorizontalStackLayout Spacing="10">
                                     <!-- Smaller main image with tap function to open in full screen -->
-                                <Image Source="{Binding ImageUrl}" HeightRequest="80" WidthRequest="80">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                        Command="{Binding Source={x:Reference mainTabbedPage}, Path=ShowFullScreenImageCommand}"
-                                        CommandParameter="{Binding ImageUrl}" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-
-                                <!-- Vertical stack for labels and map icon -->
-                                <VerticalStackLayout Spacing="2">
-                                    <Label Text="Check the coordinates of the Stone!" />
-
-                                    <!-- Map icon with tap gesture -->
-                                    <Image Source="map.png"
-                                       HeightRequest="40"
-                                       WidthRequest="40">
+                                    <Image Source="{Binding ImageUrl}" HeightRequest="80" WidthRequest="80">
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer 
-                                            Command="{Binding Source={x:Reference mainTabbedPage}, Path=OpenMapsCommand}"
-                                            CommandParameter="{Binding LastSeenLocation}" />
+                                        Command="{Binding Source={x:Reference mainTabbedPage}, Path=ShowFullScreenImageCommand}"
+                                        CommandParameter="{Binding ImageUrl}" />
                                         </Image.GestureRecognizers>
                                     </Image>
-                                </VerticalStackLayout>
+
+                                    <!-- Vertical stack for labels and map icon -->
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="Check the coordinates of the Stone!" />
+
+                                        <!-- Map icon with tap gesture -->
+                                        <Image Source="map.png"
+                                       HeightRequest="40"
+                                       WidthRequest="40">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference mainTabbedPage}, Path=OpenMapsCommand}"
+                                            CommandParameter="{Binding LastSeenLocation}" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </VerticalStackLayout>
                                     <!-- Delete button -->
-                                    <Button Text="Delete" TextColor="Red" 
+                                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                        
+                                        <Image Source="remove.png"
+                                       HeightRequest="30"
+                                       WidthRequest="30">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer 
                                             Command="{Binding Source={x:Reference mainTabbedPage}, Path=DeleteStoneCommand}" 
                                             CommandParameter="{Binding ItemId}" />
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </VerticalStackLayout>
 
                                 </HorizontalStackLayout>
                         </Frame>

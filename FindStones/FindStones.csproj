@@ -58,6 +58,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\map.png" />
+	  <None Remove="Resources\Images\remove.png" />
 	</ItemGroup>
 
 	<ItemGroup>
