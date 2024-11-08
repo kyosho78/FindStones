@@ -14,8 +14,14 @@
                         <Frame Padding="5" Margin="5" HasShadow="False" BorderColor="Gray" CornerRadius="10">
                             <!-- Horizontal layout for compact arrangement -->
                             <HorizontalStackLayout Spacing="10">
-                                <!-- Smaller main image -->
-                                <Image Source="{Binding ImageUrl}" HeightRequest="80" WidthRequest="80" />
+                                <!-- Smaller main image with tap gesture to open in full screen -->
+                                <Image Source="{Binding ImageUrl}" HeightRequest="80" WidthRequest="80">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                        Command="{Binding Source={x:Reference mainTabbedPage}, Path=ShowFullScreenImageCommand}"
+                                        CommandParameter="{Binding ImageUrl}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
 
                                 <!-- Vertical stack for labels and map icon -->
                                 <VerticalStackLayout Spacing="2">

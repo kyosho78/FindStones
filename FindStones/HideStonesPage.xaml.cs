@@ -78,6 +78,14 @@ namespace FindStones
                 return;
             }
 
+            var stoneName = StoneNameEntry.Text;
+
+            if (string.IsNullOrWhiteSpace(stoneName))
+            {
+                await DisplayAlert("Error", "Please enter a name for the stone.", "OK");
+                return;
+            }
+
             var currentUserId = Preferences.Get("UserId", 0);  // Retrieve user ID from preferences
 
             if (currentUserId == 0)
@@ -87,6 +95,7 @@ namespace FindStones
                 return;
             }
 
+            // Create a new Location object
             var newLocation = new FindStonesAPI.Models.Location
             {
                 UserId = currentUserId,  // Use the stored user ID
@@ -105,7 +114,7 @@ namespace FindStones
 
             var newItem = new Item
             {
-                ItemName = "Hidden Stone",
+                ItemName = stoneName,
                 ImageUrl = photoResult.FullPath,
                 LastSeenLocation = $"{currentLocation.Latitude.ToString(CultureInfo.InvariantCulture)},{currentLocation.Longitude.ToString(CultureInfo.InvariantCulture)}",
 
@@ -126,9 +135,10 @@ namespace FindStones
                 await DisplayAlert("Error", "Failed to hide the stone. Please try again.", "OK");
             }
 
-            // Clear the captured image and location
+            // Clear the captured image, location and stone name entry
             CapturedImage.Source = null;
             LocationLabel.Text = "Location: ";
+            StoneNameEntry.Text = string.Empty;
 
             // Reset the photoResult and currentLocation
             photoResult = null;

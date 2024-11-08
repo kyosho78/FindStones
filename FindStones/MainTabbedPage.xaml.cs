@@ -20,6 +20,15 @@ namespace FindStones
             }
         });
 
+        public ICommand ShowFullScreenImageCommand => new Command<string>(async (imageUrl) =>
+        {
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                await Navigation.PushModalAsync(new ImagePopupPage(imageUrl));
+            }
+        });
+
+
 
 
 
