@@ -83,7 +83,6 @@ public class ApiServices
         return null;
     }
 
-    // API call for Location model
     public async Task<List<Item>> GetHiddenStonesAsync(int userId)
     {
         HttpResponseMessage response = await _httpClient.GetAsync($"api/Items/user/{userId}/hiddenstones");
@@ -94,7 +93,6 @@ public class ApiServices
         }
         return new List<Item>(); // Return an empty list if the request fails
     }
-
 
 
 

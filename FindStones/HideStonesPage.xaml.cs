@@ -1,6 +1,7 @@
 using FindStonesAPI.Models;
 using Microsoft.Maui.Media;
 using System;
+using System.Collections.ObjectModel;
 
 namespace FindStones
 {
@@ -9,11 +10,30 @@ namespace FindStones
         private readonly ApiServices _apiService;
         private FileResult photoResult;
         private Microsoft.Maui.Devices.Sensors.Location currentLocation;
+        public ObservableCollection<Item> HiddenStones { get; set; }
+
 
         public HideStonesPage()
         {
             InitializeComponent();
             _apiService = new ApiServices();  // Initialize ApiServices
+            HiddenStones = new ObservableCollection<Item>();
+            BindingContext = this;
+            LoadHiddenStones();
+        }
+
+                private async void LoadHiddenStones()
+        {
+            var userId = Preferences.Get("UserId", 0);
+            if (userId != 0)
+            {
+                var stones = await _apiService.GetHiddenStonesAsync(userId);
+                HiddenStones.Clear();
+                foreach (var stone in stones)
+                {
+                    HiddenStones.Add(stone);
+                }
+            }
         }
 
         private async void OnTakePictureClicked(object sender, EventArgs e)
@@ -98,18 +118,20 @@ namespace FindStones
             if (response.IsSuccessStatusCode)
             {
                 await DisplayAlert("Success", "The stone has been hidden successfully.", "OK");
-
-                // Refresh the hidden stones list in MainTabbedPage
-                var mainPage = (MainTabbedPage)Application.Current.MainPage;
-                mainPage.LoadHiddenStones();
-
-                // Optionally switch to the Hidden Stones tab
-                mainPage.CurrentPage = mainPage.Children.FirstOrDefault(p => p.Title == "Hidden Stones");
             }
             else
             {
                 await DisplayAlert("Error", "Failed to hide the stone. Please try again.", "OK");
             }
+
+            // Clear the captured image and location
+            CapturedImage.Source = null;
+            LocationLabel.Text = "Location: ";
+
+            // Reset the photoResult and currentLocation
+            photoResult = null;
+            currentLocation = null;
+
 
         }
     }
