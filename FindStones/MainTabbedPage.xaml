@@ -42,7 +42,12 @@
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </VerticalStackLayout>
-                            </HorizontalStackLayout>
+                                    <!-- Delete button -->
+                                    <Button Text="Delete" TextColor="Red" 
+                                            Command="{Binding Source={x:Reference mainTabbedPage}, Path=DeleteStoneCommand}" 
+                                            CommandParameter="{Binding ItemId}" />
+
+                                </HorizontalStackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
