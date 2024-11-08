@@ -10,30 +10,36 @@
             <CollectionView x:Name="HiddenStonesCollectionView" VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="10">
-                            <Image Source="{Binding ImageUrl}" HeightRequest="200" />
-                            <Label Text="{Binding LastSeenLocation}" FontSize="14" />
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Google Maps">
-                                            <Span.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                Command="{Binding Source={x:Reference mainTabbedPage}, Path=OpenMapsCommand}" 
-                                                CommandParameter="{Binding LastSeenLocation, StringFormat='https://www.google.com/maps/place/{0}'}" />
-                                            </Span.GestureRecognizers>
-                                        </Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                        <!-- Frame for a compact box effect -->
+                        <Frame Padding="5" Margin="5" HasShadow="False" BorderColor="Gray" CornerRadius="10">
+                            <!-- Horizontal layout for compact arrangement -->
+                            <HorizontalStackLayout Spacing="10">
+                                <!-- Smaller main image -->
+                                <Image Source="{Binding ImageUrl}" HeightRequest="80" WidthRequest="80" />
 
+                                <!-- Vertical stack for labels and map icon -->
+                                <VerticalStackLayout Spacing="2">
+                                    <Label Text="Check the coordinates of the Stone!" />
 
-                        </StackLayout>
+                                    <!-- Map icon with tap gesture -->
+                                    <Image Source="map.png"
+                                       HeightRequest="40"
+                                       WidthRequest="40">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference mainTabbedPage}, Path=OpenMapsCommand}"
+                                            CommandParameter="{Binding LastSeenLocation}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
     </ContentPage>
+
 
 
     <!-- Tab for Hide Stones -->

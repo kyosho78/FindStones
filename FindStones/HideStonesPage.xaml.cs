@@ -2,6 +2,7 @@ using FindStonesAPI.Models;
 using Microsoft.Maui.Media;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace FindStones
 {
@@ -106,7 +107,8 @@ namespace FindStones
             {
                 ItemName = "Hidden Stone",
                 ImageUrl = photoResult.FullPath,
-                LastSeenLocation = $"{currentLocation.Latitude}, {currentLocation.Longitude}",
+                LastSeenLocation = $"{currentLocation.Latitude.ToString(CultureInfo.InvariantCulture)},{currentLocation.Longitude.ToString(CultureInfo.InvariantCulture)}",
+
                 CreatedAt = DateTime.UtcNow,
                 LocationId = locationId.Value,  // Use the obtained location ID
                 CreatorId = currentUserId  // Use the stored user ID

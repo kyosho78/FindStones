@@ -7,11 +7,19 @@ namespace FindStones
     {
         private readonly ApiServices _apiService;
 
-        public ICommand OpenMapsCommand => new Command<string>(async (url) =>
+        public ICommand OpenMapsCommand => new Command<string>(async (location) =>
         {
-            Console.WriteLine($"Opening URL: {url}");
-            await Launcher.OpenAsync(url);
+            if (!string.IsNullOrWhiteSpace(location))
+            {
+                var url = $"https://www.google.com/maps/search/?api=1&query={location}";
+                await Launcher.OpenAsync(url);
+            }
+            else
+            {
+                Console.WriteLine("Location is missing or invalid.");
+            }
         });
+
 
 
 
