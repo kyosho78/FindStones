@@ -85,9 +85,9 @@ namespace FindStones
         //Method to load hidden stones
         private async void LoadHiddenStones()
         {
-            var userId = Preferences.Get("UserId", 0);
-            var hiddenStones = await _apiService.GetHiddenStonesAsync(userId);
-            HiddenStonesCollectionView.ItemsSource = hiddenStones;
+            var userId = Preferences.Get("UserId", 0); //Get user ID  
+            var hiddenStones = await _apiService.GetHiddenStonesAsync(userId); //Get hidden stones
+            HiddenStonesCollectionView.ItemsSource = hiddenStones; //Set hidden stones to collection view
         }
 
         // Method to refresh data

@@ -11,6 +11,7 @@
             <RefreshView x:Name="HiddenStonesRefreshView"
                          Command="{Binding RefreshCommand}"
                          IsRefreshing="{Binding IsRefreshing}">
+                <!-- List all HiddenStones-->
                 <CollectionView x:Name="HiddenStonesCollectionView" VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                     <DataTemplate>

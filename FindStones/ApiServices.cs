@@ -113,6 +113,7 @@ public class ApiServices
 
     public async Task<(bool Success, int UserId, string ErrorMessage)> LoginUserAsync(string username, string password)
     {
+        // Create an anonymous object with the username and password
         var loginData = new { Username = username, Password = password };
         var jsonContent = JsonConvert.SerializeObject(loginData);
         var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");

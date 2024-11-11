@@ -24,7 +24,7 @@ public partial class FindStonesPage : ContentPage
     private async Task ShowAllStonesOnMap()
     {
         // Retrieve userId from Preferences
-        int userId = Preferences.Get("UserId", 0); // 0 is the default if not found
+        int userId = Preferences.Get("UserId", 0);
 
         if (userId == 0)
         {
